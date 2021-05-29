@@ -2,20 +2,21 @@ package com.hotels.dto;
 
 import com.hotels.enums.RoomStatus;
 import com.hotels.enums.Type;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RoomDto {
+
+    private Long id;
 
     private String name;
 
@@ -25,4 +26,6 @@ public class RoomDto {
     private Long pricePerDay;
 
     private String hotelName;
+
+    private RoomStatus roomStatus;
 }

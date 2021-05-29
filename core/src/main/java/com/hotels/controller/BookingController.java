@@ -29,8 +29,23 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.OK).body(bookingService.findById(id));
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public ResponseEntity<Booking> booking(@RequestBody BookingDto bookingDto, @ApiIgnore Principal principal){
         return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.booking(bookingDto, principal.getName()));
+    }
+
+    @PostMapping("/confirm/{id}")
+    public ResponseEntity<Boolean> confirm(@PathVariable Long id, @ApiIgnore Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(bookingService.confirm(id, principal.getName()));
+    }
+
+    @PostMapping("/reject/{id}")
+    public ResponseEntity<Boolean> reject(@PathVariable Long id, @ApiIgnore Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(bookingService.reject(id, principal.getName()));
+    }
+
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<Boolean> cancel(@PathVariable Long id, @ApiIgnore Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(bookingService.cancel(id, principal.getName()));
     }
 }

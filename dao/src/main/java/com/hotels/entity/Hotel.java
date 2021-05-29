@@ -1,5 +1,7 @@
 package com.hotels.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,11 +35,17 @@ public class Hotel {
     private String address;
 
     @Column
-    private Integer count = 10;
+    private Integer count;
 
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Room> rooms = new ArrayList<>();
 
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY)
     private List<User> admins = new ArrayList<>();
+
+    public Integer getCount() {
+        return rooms.size();
+    }
+
 }

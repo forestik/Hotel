@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/signIn")
             .permitAll()
             .antMatchers(HttpMethod.GET,
+                "/booking/**",
                 "/hotel",
                 "/ownSecurity/verifyEmail",
                 "/ownSecurity/updateAccessToken",
@@ -105,11 +106,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/{userId}/habit/assign")
             .permitAll()
             .antMatchers(HttpMethod.POST,
+                "/booking/cancel/*",
                 "/ownSecurity/signUp",
                 "/ownSecurity/signIn",
                 "/ownSecurity/changePassword")
             .permitAll()
             .antMatchers(HttpMethod.GET,
+                "/hotel/**",
+                "/room/**",
                 "/user",
                 "/user/{userId}/profile/",
                 "/user/isOnline/{userId}/",
@@ -122,6 +126,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.PUT,
                 "/ownSecurity",
                 "/user/profile")
+            .hasAnyRole(USER, ADMIN).antMatchers(HttpMethod.PUT,
+                "/ownSecurity",
+                "/user/profile")
+            .hasAnyRole(USER, ADMIN).antMatchers(HttpMethod.POST,
+                "/booking",
+                "/user/profile")
             .hasAnyRole(USER, ADMIN)
             .antMatchers(HttpMethod.PATCH,
                 "/user/profilePicture",
@@ -132,9 +142,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/roles")
             .hasAnyRole(ADMIN)
             .antMatchers(HttpMethod.POST,
+                "/hotel/**",
+                "/booking/**",
                 "/place/filter/predicate")
             .hasAnyRole(ADMIN)
             .antMatchers(HttpMethod.PUT,
+                "/hotel/**",
                 "/place/update/")
             .hasAnyRole(ADMIN)
             .antMatchers(HttpMethod.PATCH,

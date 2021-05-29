@@ -1,5 +1,6 @@
 package com.hotels.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -29,7 +30,8 @@ public class Booking {
     @OneToOne
     private Room room;
 
-    @ManyToOne()
+    @ManyToOne
+    @JsonManagedReference
     private User customer;
 
     @ManyToOne

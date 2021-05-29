@@ -11,4 +11,10 @@ public interface BookingService {
     Booking findById(Long id);
 
     List<Booking> findAll(String userEmail);
+
+    Boolean confirm(Long id, String userEmail);
+
+    Boolean reject(Long id, String userEmail);
+
+    Boolean cancel(Long id, String userEmail);
 }

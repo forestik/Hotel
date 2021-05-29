@@ -1,5 +1,6 @@
 package com.hotels.controller;
 
+import com.hotels.dto.HotelCreateDto;
 import com.hotels.dto.HotelDto;
 import com.hotels.entity.Hotel;
 import com.hotels.service.HotelService;
@@ -20,12 +21,12 @@ public class HotelController {
     private final HotelService hotelService;
 
     @GetMapping
-    public ResponseEntity<List<Hotel>> findAll() {
+    public ResponseEntity<List<HotelDto>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(hotelService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hotel> findById(@PathVariable Long id) {
+    public ResponseEntity<HotelDto> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(hotelService.findById(id));
     }
 
@@ -35,8 +36,8 @@ public class HotelController {
     }
 
     @PutMapping
-    public ResponseEntity<Hotel> update(@RequestBody HotelDto hotelDto, @ApiIgnore Principal principal){
-        return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.update(hotelDto, principal.getName()));
+    public ResponseEntity<Hotel> update(@RequestBody HotelDto hotelDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.update(hotelDto));
     }
 
     @DeleteMapping

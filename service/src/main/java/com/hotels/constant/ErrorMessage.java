@@ -17,7 +17,6 @@ public final class ErrorMessage {
     public static final String ROOM_NOT_FOUND_BY_ID = "Room doesn't exist by this id: ";
     public static final String BOOKING_NOT_FOUND_BY_ID = "Booking doesn't exist by this id: ";
     public static final String USER_CREATED = "{greenCity.validation.user.created}";
-    public static final String USER_DONT_HAVE_PERMISSION = "User don`t have permission";
 
     private ErrorMessage() {
     }

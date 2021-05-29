@@ -1,23 +1,18 @@
 package com.hotels.controller;
 
-import com.hotels.constant.ErrorMessage;
 import com.hotels.dto.OwnSignInDto;
 import com.hotels.dto.OwnSignUpDto;
 import com.hotels.dto.SuccessSignInDto;
 import com.hotels.exceptions.UserAlreadyRegisteredException;
-import com.hotels.genericresponse.GenericResponseDto;
 import com.hotels.service.OwnSecurityService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-
-import static com.hotels.genericresponse.GenericResponseDto.buildGenericResponseDto;
 
 @Controller
 @RequestMapping("/home")

@@ -39,7 +39,7 @@ public class Room {
     @ManyToOne
     private User user;
 
-    @ManyToOne
+    @ManyToOne()
     private Hotel hotel;
 
     @OneToOne

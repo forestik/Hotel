@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class BookingServiceImpl implements BookingService {
                 .dateTo(bookingDto.getDateTo())
                 .room(room)
                 .build();
+        roomService.bookingRoom(bookingDto.getRoomId());
         return bookingRepo.save(booking);
     }
 
@@ -47,5 +49,40 @@ public class BookingServiceImpl implements BookingService {
         User user = userService.findByEmail(userEmail);
         return bookingRepo.findByCustomer(user);
     }
+
+    @Override
+    public Boolean confirm(Long id, String userEmail) {
+        Booking booking = getBooking(id, userEmail, true);
+        roomService.reserveRoom(booking.getRoom().getId());
+        return true;
+    }
+
+    @Override
+    public Boolean reject(Long id, String userEmail) {
+        Booking booking = getBooking(id, userEmail, false);
+        roomService.freeRoom(booking.getRoom().getId());
+        return false;
+    }
+
+    private Booking getBooking(Long id, String userEmail, Boolean condition) {
+        User user = userService.findByEmail(userEmail);
+        Booking booking = findById(id);
+        booking.setAdmin(user);
+        booking.setConfirmed(condition);
+        bookingRepo.save(booking);
+        return booking;
+    }
+
+    @Override
+    public Boolean cancel(Long id, String userEmail) {
+        try {
+            bookingRepo.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
 
 }

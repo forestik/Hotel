@@ -1,5 +1,7 @@
 package com.hotels.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hotels.enums.EmailNotification;
 import com.hotels.enums.Role;
 import com.hotels.enums.UserStatus;
@@ -43,6 +45,7 @@ public class User {
     private Role role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private OwnSecurity ownSecurity;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
@@ -66,10 +69,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Room> rooms = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Booking> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
+    @JsonBackReference
     private List<Booking> bookings = new ArrayList<>();
 
     @ManyToOne

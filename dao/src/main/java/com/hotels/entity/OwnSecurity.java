@@ -1,5 +1,7 @@
 package com.hotels.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -26,5 +28,6 @@ public class OwnSecurity {
     private String password;
 
     @OneToOne
+    @JsonBackReference
     private User user;
 }

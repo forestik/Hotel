@@ -8,12 +8,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/room")
 @AllArgsConstructor
 public class RoomController {
 
     private final RoomService roomService;
+
+    @GetMapping("/hotel/{id}")
+    public ResponseEntity<List<RoomDto>> getRoomsByHotelId(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(roomService.getRoomsByHotelId(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RoomDto> getRoomById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(roomService.getById(id));
+    }
 
     @PostMapping
     public ResponseEntity<Room> create(@RequestBody RoomDto roomDto){
@@ -25,8 +37,8 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(roomService.update(id, roomDto));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Object> delete(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
         roomService.deleteById(id);
         return ResponseEntity.ok().build();
     }
