@@ -12,6 +12,8 @@ public interface BookingService {
 
     List<Booking> findAll(String userEmail);
 
+    List<Booking> findAll();
+
     Boolean confirm(Long id, String userEmail);
 
     Boolean reject(Long id, String userEmail);

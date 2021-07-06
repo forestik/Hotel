@@ -23,6 +23,11 @@ public class BookingController {
     public ResponseEntity<List<Booking>> findAll(@ApiIgnore Principal principal) {
         return ResponseEntity.status(HttpStatus.OK).body(bookingService.findAll(principal.getName()));
     }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<Booking>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(bookingService.findAll());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Booking> findById(@PathVariable Long id) {

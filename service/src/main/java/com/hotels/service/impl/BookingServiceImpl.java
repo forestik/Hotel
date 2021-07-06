@@ -51,6 +51,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<Booking> findAll() {
+        return bookingRepo.findAll();
+    }
+
+    @Override
     public Boolean confirm(Long id, String userEmail) {
         Booking booking = getBooking(id, userEmail, true);
         roomService.reserveRoom(booking.getRoom().getId());
