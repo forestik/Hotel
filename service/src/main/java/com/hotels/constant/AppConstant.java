@@ -6,6 +6,8 @@ public final class AppConstant {
     public static final String USER = "USER";
     public static final String AUTHORITIES = "authorities";
     public static final String REGISTRATION_EMAIL_FIELD_NAME = "email";
+    public static final String USERNAME = "name";
+    public static final String GOOGLE_PICTURE = "picture";
 
     private AppConstant() {
     }

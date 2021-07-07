@@ -79,4 +79,7 @@ public class User {
 
     @ManyToOne
     private Hotel hotel;
+
+    @Column(name = "profile_picture")
+    private String profilePicturePath;
 }
