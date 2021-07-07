@@ -24,6 +24,9 @@
 	<description>Hotel management system</description>
 	<properties>
 		<java.version>11</java.version>
+<!--		<sonar.projectKey>Forestik-Hotels_Hotel</sonar.projectKey>-->
+<!--		<sonar.organization>forestik-hotels</sonar.organization>-->
+<!--		<sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
 	</properties>
 
 	<dependencies>
