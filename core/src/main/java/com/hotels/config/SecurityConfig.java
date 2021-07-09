@@ -220,7 +220,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public GoogleIdTokenVerifier googleIdTokenVerifier(@Value("${google.clientId}") String clientId) {
         return new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance())
-                .setAudience(Collections.singletonList(clientId))
-                .build();
+            .setAudience(Collections.singletonList(clientId))
+            .build();
     }
 }

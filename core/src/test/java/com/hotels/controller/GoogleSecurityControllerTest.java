@@ -28,16 +28,16 @@ class GoogleSecurityControllerTest {
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcBuilders
-                .standaloneSetup(googleSecurityController)
-                .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
-                .build();
+            .standaloneSetup(googleSecurityController)
+            .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+            .build();
     }
 
     @Test
     void authenticateTest() throws Exception {
         mockMvc.perform(get("/googleSecurity")
-                .param("idToken", "almostSecretToken"))
-                .andExpect(status().isOk());
+            .param("idToken", "almostSecretToken"))
+            .andExpect(status().isOk());
         verify(googleSecurityService).authenticate("almostSecretToken");
     }
 }

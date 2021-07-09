@@ -70,13 +70,13 @@ class GoogleSecurityServiceImplTest {
     @Test
     void authenticationThrowsIllegalArgumentExceptionTest() {
         assertThrows(IllegalArgumentException.class,
-                () -> googleSecurityService.authenticate("1234"));
+            () -> googleSecurityService.authenticate("1234"));
     }
 
     @Test
     void authenticationThrowsIllegalArgumentExceptionInCatchBlockTest() throws GeneralSecurityException, IOException {
         when(googleIdTokenVerifier.verify("1234")).thenThrow(GeneralSecurityException.class);
         assertThrows(IllegalArgumentException.class,
-                () -> googleSecurityService.authenticate("1234"));
+            () -> googleSecurityService.authenticate("1234"));
     }
 }

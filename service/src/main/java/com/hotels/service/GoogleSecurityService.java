@@ -1,6 +1,5 @@
 package com.hotels.service;
 
-
 import com.hotels.dto.SuccessSignInDto;
 
 /**
