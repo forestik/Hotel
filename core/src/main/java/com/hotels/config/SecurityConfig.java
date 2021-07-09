@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET,
                 "/booking/**",
                 "/hotel",
+                "/googleSecurity/**",
                 "/ownSecurity/verifyEmail",
                 "/ownSecurity/updateAccessToken",
                 "/ownSecurity/restorePassword",

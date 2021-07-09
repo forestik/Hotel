@@ -9,8 +9,8 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
@@ -39,8 +39,8 @@ public class GoogleSecurityController {
         @ApiResponse(code = 200, message = HttpStatuses.OK, response = SuccessSignInDto.class),
         @ApiResponse(code = 400, message = BAD_GOOGLE_TOKEN)
     })
-    @GetMapping
-    public SuccessSignInDto authenticate(@RequestParam @NotBlank String idToken) {
+    @GetMapping("/{idToken}")
+    public SuccessSignInDto authenticate(@PathVariable @NotBlank String idToken) {
         return googleSecurityService.authenticate(idToken);
     }
 }
