@@ -28,8 +28,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Room findById(Long roomId) {
         return roomRepo.findById(roomId)
-                .orElseThrow(() ->
-                        new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + roomId));
+            .orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + roomId));
     }
 
     @Override
@@ -37,15 +36,16 @@ public class RoomServiceImpl implements RoomService {
         Hotel hotel = hotelService.findByName(roomDto.getHotelName());
         if (hotel != null) {
             Room room = Room.builder()
-                    .hotel(hotel)
-                    .name(roomDto.getName())
-                    .pricePerDay(roomDto.getPricePerDay())
-                    .type(roomDto.getType())
-                    .roomStatus(roomDto.getRoomStatus())
-                    .build();
+                .hotel(hotel)
+                .name(roomDto.getName())
+                .pricePerDay(roomDto.getPricePerDay())
+                .type(roomDto.getType())
+                .roomStatus(roomDto.getRoomStatus())
+                .build();
             return roomRepo.save(room);
+        } else {
+            throw new NotFoundException(ErrorMessage.HOTEL_NOT_FOUND_BY_NAME + roomDto.getHotelName());
         }
-        else throw new NotFoundException(ErrorMessage.HOTEL_NOT_FOUND_BY_NAME + roomDto.getHotelName());
     }
 
     @Override
@@ -56,8 +56,8 @@ public class RoomServiceImpl implements RoomService {
     @Override
     @Transactional
     public Room update(Long id, RoomDto roomDto) {
-        Room room = roomRepo.findById(id).orElseThrow(() ->
-                new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
+        Room room =
+            roomRepo.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
         room.setName(roomDto.getName());
         room.setPricePerDay(roomDto.getPricePerDay());
         room.setType(roomDto.getType());
@@ -68,35 +68,37 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<RoomDto> getRoomsByHotelId(Long hotelId) {
         return modelMapper.map(roomRepo.findByHotelId(hotelId),
-                new TypeToken<List<RoomDto>>(){}.getType());
+            new TypeToken<List<RoomDto>>() {
+            }.getType());
     }
 
     @Override
     public RoomDto getById(Long id) {
-        return modelMapper.map(roomRepo.findById(id).orElseThrow(() ->
-                new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id)), RoomDto.class);
+        return modelMapper.map(
+            roomRepo.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id)),
+            RoomDto.class);
     }
 
     @Override
     public void reserveRoom(Long id) {
-        Room room = roomRepo.findById(id).orElseThrow(() ->
-                new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
+        Room room =
+            roomRepo.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
         room.setRoomStatus(RoomStatus.RESERVED);
         roomRepo.save(room);
     }
 
     @Override
     public void bookingRoom(Long id) {
-        Room room = roomRepo.findById(id).orElseThrow(() ->
-                new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
+        Room room =
+            roomRepo.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
         room.setRoomStatus(RoomStatus.BOOKING);
         roomRepo.save(room);
     }
 
     @Override
     public void freeRoom(Long id) {
-        Room room = roomRepo.findById(id).orElseThrow(() ->
-                new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
+        Room room =
+            roomRepo.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.ROOM_NOT_FOUND_BY_ID + id));
         room.setRoomStatus(RoomStatus.FREE);
         roomRepo.save(room);
     }

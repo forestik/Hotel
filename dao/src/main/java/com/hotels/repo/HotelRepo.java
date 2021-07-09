@@ -9,5 +9,11 @@ import java.util.Optional;
 @Repository
 public interface HotelRepo extends JpaRepository<Hotel, Long> {
 
+    /**
+     * Find hotel by name.
+     *
+     * @param name of hotel
+     * @return {@link Hotel}
+     */
     Optional<Hotel> findByName(String name);
 }

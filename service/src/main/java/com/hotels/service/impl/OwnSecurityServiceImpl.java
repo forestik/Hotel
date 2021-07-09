@@ -40,16 +40,17 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
     private final JwtTool jwtTool;
     private final Integer expirationTime;
     private final EmailService emailService;
+
     /**
      * Constructor.
      */
     @Autowired
     public OwnSecurityServiceImpl(OwnSecurityRepo ownSecurityRepo,
-                                  UserService userService,
-                                  PasswordEncoder passwordEncoder,
-                                  JwtTool jwtTool,
-                                  @Value("${verifyEmailTimeHour}") Integer expirationTime,
-                                  EmailService emailService) {
+        UserService userService,
+        PasswordEncoder passwordEncoder,
+        JwtTool jwtTool,
+        @Value("${verifyEmailTimeHour}") Integer expirationTime,
+        EmailService emailService) {
         this.ownSecurityRepo = ownSecurityRepo;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -74,8 +75,8 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
         try {
             User savedUser = userService.save(user);
             user.setId(savedUser.getId());
-            emailService.sendVerificationEmail
-                    (savedUser.getId(), savedUser.getFirstName(), savedUser.getEmail(), savedUser.getVerifyEmail().getToken());
+            emailService.sendVerificationEmail(savedUser.getId(), savedUser.getFirstName(), savedUser.getEmail(),
+                savedUser.getVerifyEmail().getToken());
         } catch (DataIntegrityViolationException e) {
             throw new UserAlreadyRegisteredException(ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL);
         }

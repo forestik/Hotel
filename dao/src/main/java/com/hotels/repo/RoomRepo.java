@@ -9,5 +9,11 @@ import java.util.List;
 @Repository
 public interface RoomRepo extends JpaRepository<Room, Long> {
 
+    /**
+     * Find all rooms in hotel.
+     *
+     * @param id of hotel
+     * @return list of {@link Room}
+     */
     List<Room> findByHotelId(Long id);
 }

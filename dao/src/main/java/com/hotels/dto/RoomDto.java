@@ -7,7 +7,6 @@ import lombok.*;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-
 @Getter
 @Setter
 @EqualsAndHashCode

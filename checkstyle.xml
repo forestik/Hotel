@@ -20,18 +20,6 @@
         <property name="eachLine" value="true"/>
     </module>
 
-    <module name="RegexpMultiline">
-        <property name="message" value="Blank line at start of block should be removed"/>
-        <property name="format" value="(?&lt;=\{\s{0,99}$)^$"/>
-        <property name="fileExtensions" value="groovy,java"/>
-    </module>
-
-    <module name="RegexpMultiline">
-        <property name="message" value="Blank line at end of block should be removed"/>
-        <property name="format" value="(?&lt;!\{\s{0,99}$)^$(?=^\s{0,99}\})"/>
-        <property name="fileExtensions" value="groovy,java"/>
-    </module>
-
     <module name="TreeWalker">
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
@@ -210,7 +198,7 @@
             <property name="option" value="NL"/>
             <property name="tokens"
                       value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR,
-                    LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF "/>
+                    LT, MINUS, MOD, NOT_EQUAL, QUESTION, SL, SR, STAR, METHOD_REF "/>
         </module>
         <module name="AnnotationLocation">
             <property name="id" value="AnnotationLocationMostCases"/>
