@@ -33,8 +33,8 @@ public class JwtTool {
      */
     @Autowired
     public JwtTool(@Value("${accessTokenValidTimeInMinutes}") Integer accessTokenValidTimeInMinutes,
-                   @Value("${refreshTokenValidTimeInMinutes}") Integer refreshTokenValidTimeInMinutes,
-                   @Value("${tokenKey}") String accessTokenKey) {
+        @Value("${refreshTokenValidTimeInMinutes}") Integer refreshTokenValidTimeInMinutes,
+        @Value("${tokenKey}") String accessTokenKey) {
         this.accessTokenValidTimeInMinutes = accessTokenValidTimeInMinutes;
         this.refreshTokenValidTimeInMinutes = refreshTokenValidTimeInMinutes;
         this.accessTokenKey = accessTokenKey;

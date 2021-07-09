@@ -1,6 +1,5 @@
 package com.hotels.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -34,15 +34,14 @@ public class EmailServiceImpl implements EmailService {
      */
     @Autowired
     public EmailServiceImpl(JavaMailSender javaMailSender,
-                            ITemplateEngine templateEngine,
-                            @Value("${client.address}") String clientLink,
-                            @Value("${sender.email.address}") String senderEmailAddress) {
+        ITemplateEngine templateEngine,
+        @Value("${client.address}") String clientLink,
+        @Value("${sender.email.address}") String senderEmailAddress) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
         this.clientLink = clientLink;
         this.senderEmailAddress = senderEmailAddress;
     }
-
 
     /**
      * {@inheritDoc}

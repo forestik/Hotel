@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,11 +28,11 @@ public class BookingServiceImpl implements BookingService {
         User user = userService.findByEmail(userEmail);
         Room room = roomService.findById(bookingDto.getRoomId());
         Booking booking = Booking.builder()
-                .customer(user)
-                .dateFrom(bookingDto.getDateFrom())
-                .dateTo(bookingDto.getDateTo())
-                .room(room)
-                .build();
+            .customer(user)
+            .dateFrom(bookingDto.getDateFrom())
+            .dateTo(bookingDto.getDateTo())
+            .room(room)
+            .build();
         roomService.bookingRoom(bookingDto.getRoomId());
         return bookingRepo.save(booking);
     }
@@ -41,7 +40,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking findById(Long id) {
         return bookingRepo.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.BOOKING_NOT_FOUND_BY_ID + id));
+            .orElseThrow(() -> new NotFoundException(ErrorMessage.BOOKING_NOT_FOUND_BY_ID + id));
     }
 
     @Override
@@ -83,11 +82,9 @@ public class BookingServiceImpl implements BookingService {
         try {
             bookingRepo.deleteById(id);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-
 
 }

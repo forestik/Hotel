@@ -12,12 +12,12 @@ public class HotelDtoMapper extends AbstractConverter<Hotel, HotelDto> {
     public HotelDto convert(Hotel hotel) {
 
         return HotelDto.builder()
-                .id(hotel.getId())
-                .name(hotel.getName())
-                .address(hotel.getAddress())
-                .count(hotel.getCount())
-                .email(hotel.getEmail())
-                .phone(hotel.getPhone())
-                .build();
+            .id(hotel.getId())
+            .name(hotel.getName())
+            .address(hotel.getAddress())
+            .count(hotel.getCount())
+            .email(hotel.getEmail())
+            .phone(hotel.getPhone())
+            .build();
     }
 }
