@@ -26,13 +26,12 @@ public class OwnSignUpDto {
 
     @NotBlank
     @Length(
-            min = ValidationConstants.USERNAME_MIN_LENGTH,
-            max = ValidationConstants.USERNAME_MAX_LENGTH)
+        min = ValidationConstants.USERNAME_MIN_LENGTH,
+        max = ValidationConstants.USERNAME_MAX_LENGTH)
     @Pattern(
-            regexp = "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$",
-            message = ValidationConstants.INVALID_USERNAME)
+        regexp = "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$",
+        message = ValidationConstants.INVALID_USERNAME)
     private String lastName;
-
 
     @NotBlank
     @Email(

@@ -1,11 +1,10 @@
 package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
-import com.hotels.dto.HotelCreateDto;
 import com.hotels.dto.HotelDto;
 import com.hotels.entity.Hotel;
 import com.hotels.entity.User;
-import com.hotels.exceptions.UserDontHavePermissionException;
+import com.hotels.exceptions.NotFoundException;
 import com.hotels.repo.HotelRepo;
 import com.hotels.service.HotelService;
 import com.hotels.service.UserService;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
-import com.hotels.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,28 +26,29 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<HotelDto> findAll() {
         return modelMapper.map(hotelRepo.findAll(),
-                new TypeToken<List<HotelDto>>(){}.getType());
+            new TypeToken<List<HotelDto>>() {
+            }.getType());
     }
 
     @Override
     public HotelDto findById(Long id) {
         return modelMapper.map(hotelRepo.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.HOTEL_NOT_FOUND_BY_ID + id)),
-                HotelDto.class);
+            .orElseThrow(() -> new NotFoundException(ErrorMessage.HOTEL_NOT_FOUND_BY_ID + id)),
+            HotelDto.class);
     }
 
     @Override
     public Hotel save(HotelDto hotelDto, String userEmail) {
         User user = userService.findByEmail(userEmail);
         Hotel hotel = Hotel.builder()
-                .name(hotelDto.getName())
-                .address(hotelDto.getAddress())
-                .email(hotelDto.getEmail())
-                .phone(hotelDto.getPhone())
-                .admins(List.of(user))
-                .count(0)
-                .rooms(new ArrayList<>())
-                .build();
+            .name(hotelDto.getName())
+            .address(hotelDto.getAddress())
+            .email(hotelDto.getEmail())
+            .phone(hotelDto.getPhone())
+            .admins(List.of(user))
+            .count(0)
+            .rooms(new ArrayList<>())
+            .build();
         return hotelRepo.save(hotel);
     }
 

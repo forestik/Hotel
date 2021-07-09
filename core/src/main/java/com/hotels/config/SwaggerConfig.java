@@ -41,19 +41,19 @@ public class SwaggerConfig {
         log.info("Starting Swagger");
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(RequestHandlerSelectors.any()).build()
-                .pathMapping("/")
-                .apiInfo(ApiInfo.DEFAULT)
-                .forCodeGeneration(true)
-                .genericModelSubstitutes(ResponseEntity.class)
-                .ignoredParameterTypes(Pageable.class)
-                .ignoredParameterTypes(java.sql.Date.class)
-                .directModelSubstitute(java.time.LocalDate.class, String.class)
-                .directModelSubstitute(java.time.ZonedDateTime.class, Date.class)
-                .directModelSubstitute(java.time.LocalDateTime.class, Date.class)
-                .securityContexts(Lists.newArrayList(securityContext()))
-                .securitySchemes(Lists.newArrayList(apiKey()))
-                .useDefaultResponseMessages(false);
+            .select().apis(RequestHandlerSelectors.any()).build()
+            .pathMapping("/")
+            .apiInfo(ApiInfo.DEFAULT)
+            .forCodeGeneration(true)
+            .genericModelSubstitutes(ResponseEntity.class)
+            .ignoredParameterTypes(Pageable.class)
+            .ignoredParameterTypes(java.sql.Date.class)
+            .directModelSubstitute(java.time.LocalDate.class, String.class)
+            .directModelSubstitute(java.time.ZonedDateTime.class, Date.class)
+            .directModelSubstitute(java.time.LocalDateTime.class, Date.class)
+            .securityContexts(Lists.newArrayList(securityContext()))
+            .securitySchemes(Lists.newArrayList(apiKey()))
+            .useDefaultResponseMessages(false);
 
     }
 

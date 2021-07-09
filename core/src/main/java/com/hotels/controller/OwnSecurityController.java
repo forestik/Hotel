@@ -22,7 +22,6 @@ import java.security.Principal;
 
 import static com.hotels.constant.ErrorMessage.*;
 
-
 /**
  * Controller that provides our sign-up and sign-in logic.
  *
@@ -35,6 +34,7 @@ import static com.hotels.constant.ErrorMessage.*;
 public class OwnSecurityController {
     private final OwnSecurityService ownSecurityService;
     private final VerifyEmailService verifyEmailService;
+
     /**
      * Constructor.
      *
@@ -45,7 +45,7 @@ public class OwnSecurityController {
      */
     @Autowired
     public OwnSecurityController(OwnSecurityService ownSecurityService,
-                                 VerifyEmailService verifyEmailService) {
+        VerifyEmailService verifyEmailService) {
         this.ownSecurityService = ownSecurityService;
         this.verifyEmailService = verifyEmailService;
     }

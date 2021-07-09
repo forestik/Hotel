@@ -9,5 +9,12 @@ import java.util.List;
 
 @Repository
 public interface BookingRepo extends JpaRepository<Booking, Long> {
+
+    /**
+     * Find all booking for customer.
+     *
+     * @param user {@link User}
+     * @return list of {@link Booking}
+     */
     List<Booking> findByCustomer(User user);
 }

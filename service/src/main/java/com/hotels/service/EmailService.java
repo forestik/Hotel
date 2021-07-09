@@ -6,7 +6,7 @@ package com.hotels.service;
 public interface EmailService {
 
     /**
-     * Method for sending verification email to user
+     * Method for sending verification email to user.
      *
      * @param userId    user id.
      * @param userName  name current user.
