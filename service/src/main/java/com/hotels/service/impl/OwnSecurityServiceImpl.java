@@ -1,14 +1,24 @@
 package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
-import com.hotels.dto.*;
+import com.hotels.dto.AccessRefreshTokensDto;
+import com.hotels.dto.OwnSignInDto;
+import com.hotels.dto.OwnSignUpDto;
+import com.hotels.dto.SuccessSignInDto;
+import com.hotels.dto.SuccessSignUpDto;
+import com.hotels.dto.UpdatePasswordDto;
 import com.hotels.entity.OwnSecurity;
 import com.hotels.entity.User;
 import com.hotels.entity.VerifyEmail;
-import com.hotels.enums.EmailNotification;
-import com.hotels.enums.Role;
 import com.hotels.enums.UserStatus;
-import com.hotels.exceptions.*;
+import com.hotels.exceptions.BadRefreshTokenException;
+import com.hotels.exceptions.EmailNotVerified;
+import com.hotels.exceptions.PasswordsDoNotMatchesException;
+import com.hotels.exceptions.UserAlreadyRegisteredException;
+import com.hotels.exceptions.UserBlockedException;
+import com.hotels.exceptions.UserDeactivatedException;
+import com.hotels.exceptions.WrongEmailException;
+import com.hotels.exceptions.WrongPasswordException;
 import com.hotels.jwt.JwtTool;
 import com.hotels.repo.OwnSecurityRepo;
 import com.hotels.service.EmailService;
@@ -33,7 +43,7 @@ import static com.hotels.constant.ErrorMessage.USER_NOT_FOUND_BY_EMAIL;
  */
 @Service
 @Slf4j
-public class OwnSecurityServiceImpl implements OwnSecurityService {
+public class OwnSecurityServiceImpl extends AuthService implements OwnSecurityService {
     private final OwnSecurityRepo ownSecurityRepo;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -51,6 +61,7 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
         JwtTool jwtTool,
         @Value("${verifyEmailTimeHour}") Integer expirationTime,
         EmailService emailService) {
+        super(jwtTool);
         this.ownSecurityRepo = ownSecurityRepo;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -67,7 +78,7 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
     @Transactional
     @Override
     public SuccessSignUpDto signUp(OwnSignUpDto dto) {
-        User user = createNewRegisteredUser(dto, jwtTool.generateTokenKey());
+        User user = createNewRegisteredUser(dto, null);
         OwnSecurity ownSecurity = createOwnSecurity(dto, user);
         VerifyEmail verifyEmail = createVerifyEmail(user, jwtTool.generateTokenKey());
         user.setOwnSecurity(ownSecurity);
@@ -81,19 +92,6 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
             throw new UserAlreadyRegisteredException(ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL);
         }
         return new SuccessSignUpDto(user.getId(), user.getFirstName(), user.getEmail(), true);
-    }
-
-    private User createNewRegisteredUser(OwnSignUpDto dto, String refreshTokenKey) {
-        return User.builder()
-            .firstName(dto.getFirstName())
-            .lastName(dto.getLastName())
-            .email(dto.getEmail())
-            .dateOfRegistration(LocalDateTime.now())
-            .role(Role.ROLE_USER)
-            .refreshTokenKey(refreshTokenKey)
-            .userStatus(UserStatus.ACTIVATED)
-            .emailNotification(EmailNotification.DISABLED)
-            .build();
     }
 
     private OwnSecurity createOwnSecurity(OwnSignUpDto dto, User user) {
@@ -134,9 +132,7 @@ public class OwnSecurityServiceImpl implements OwnSecurityService {
         if (user.getUserStatus() == UserStatus.DEACTIVATED) {
             throw new UserDeactivatedException(USER_DEACTIVATED);
         }
-        String accessToken = jwtTool.createAccessToken(user.getEmail(), user.getRole());
-        String refreshToken = jwtTool.createRefreshToken(user);
-        return new SuccessSignInDto(user.getId(), accessToken, refreshToken, user.getFirstName());
+        return getSuccessSignInDto(user);
     }
 
     private boolean isPasswordCorrect(OwnSignInDto signInDto, User user) {
