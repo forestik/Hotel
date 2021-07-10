@@ -29,7 +29,15 @@ public class GoogleSecurityServiceImpl extends AuthService implements GoogleSecu
     private final UserService userService;
     private final GoogleIdTokenVerifier googleIdTokenVerifier;
 
-    public GoogleSecurityServiceImpl(JwtTool jwtTool, UserService userService, GoogleIdTokenVerifier googleIdTokenVerifier) {
+    /**
+     * Constructor.
+     *
+     * @param jwtTool               {@link JwtTool}
+     * @param userService           {@link UserService}
+     * @param googleIdTokenVerifier {@link GoogleIdTokenVerifier}
+     */
+    public GoogleSecurityServiceImpl(JwtTool jwtTool, UserService userService,
+        GoogleIdTokenVerifier googleIdTokenVerifier) {
         super(jwtTool);
         this.userService = userService;
         this.googleIdTokenVerifier = googleIdTokenVerifier;

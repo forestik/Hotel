@@ -23,15 +23,15 @@ public abstract class AuthService {
 
     protected User createNewRegisteredUser(OwnSignUpDto ownSignUpDto, String profilePicture) {
         return User.builder()
-                .firstName(ownSignUpDto.getFirstName())
-                .lastName(ownSignUpDto.getLastName())
-                .email(ownSignUpDto.getEmail())
-                .role(Role.ROLE_USER)
-                .dateOfRegistration(LocalDateTime.now())
-                .refreshTokenKey(jwtTool.generateTokenKey())
-                .profilePicturePath(profilePicture)
-                .userStatus(UserStatus.ACTIVATED)
-                .emailNotification(EmailNotification.DISABLED)
-                .build();
+            .firstName(ownSignUpDto.getFirstName())
+            .lastName(ownSignUpDto.getLastName())
+            .email(ownSignUpDto.getEmail())
+            .role(Role.ROLE_USER)
+            .dateOfRegistration(LocalDateTime.now())
+            .refreshTokenKey(jwtTool.generateTokenKey())
+            .profilePicturePath(profilePicture)
+            .userStatus(UserStatus.ACTIVATED)
+            .emailNotification(EmailNotification.DISABLED)
+            .build();
     }
 }

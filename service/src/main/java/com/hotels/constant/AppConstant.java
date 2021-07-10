@@ -9,7 +9,6 @@ public final class AppConstant {
     public static final String FAMILY_NAME = "family_name";
     public static final String GOOGLE_PICTURE = "picture";
 
-
     private AppConstant() {
     }
 }
