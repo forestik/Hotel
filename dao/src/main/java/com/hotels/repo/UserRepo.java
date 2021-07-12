@@ -60,4 +60,5 @@ public interface UserRepo extends JpaRepository<User, Long>, JpaSpecificationExe
     @Modifying
     @Query(value = "UPDATE User SET refreshTokenKey=:refreshTokenKey WHERE id=:id")
     int updateUserRefreshToken(String refreshTokenKey, Long id);
+
 }
