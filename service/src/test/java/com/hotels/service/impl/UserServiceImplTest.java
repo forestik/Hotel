@@ -57,7 +57,7 @@ class UserServiceImplTest {
     @Test
     void updateUserRefreshToken() {
         when(userRepo.updateUserRefreshToken("token", 1L)).thenReturn(1);
-        assertEquals(userService.updateUserRefreshToken("token", 1L), 1);
+        assertEquals(1, userService.updateUserRefreshToken("token", 1L));
     }
 
     @Test
