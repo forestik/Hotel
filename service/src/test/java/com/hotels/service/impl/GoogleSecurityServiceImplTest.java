@@ -33,12 +33,12 @@ class GoogleSecurityServiceImplTest {
     @Mock
     private JwtTool jwtTool;
     @Mock
-    GoogleIdToken googleIdToken;
+    private GoogleIdToken googleIdToken;
     @Spy
-    GoogleIdToken.Payload payload;
+    private GoogleIdToken.Payload payload;
 
     @InjectMocks
-    GoogleSecurityServiceImpl googleSecurityService;
+    private GoogleSecurityServiceImpl googleSecurityService;
 
     @Test
     void authenticateUserNotNullTest() throws GeneralSecurityException, IOException {

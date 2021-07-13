@@ -29,7 +29,6 @@ class GoogleSecurityControllerTest {
     void setup() {
         this.mockMvc = MockMvcBuilders
             .standaloneSetup(googleSecurityController)
-            .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
             .build();
     }
 
