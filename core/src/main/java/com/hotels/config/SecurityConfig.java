@@ -100,6 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/ownSecurity/updateAccessToken",
                 "/ownSecurity/restorePassword",
                 "/googleSecurity",
+                "/user/info/{id}",
                 "/user/emailNotifications",
                 "/user/activatedUsersAmount",
                 "/user/{userId}/habit/assign")
@@ -109,6 +110,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/ownSecurity/signUp",
                 "/ownSecurity/signIn",
                 "/ownSecurity/changePassword")
+            .permitAll()
+            .antMatchers(HttpMethod.PATCH,
+                "/user/info")
             .permitAll()
             .antMatchers(HttpMethod.GET,
                 "/hotel/**",

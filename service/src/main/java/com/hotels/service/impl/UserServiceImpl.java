@@ -1,12 +1,14 @@
 package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
+import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.exceptions.WrongIdException;
 import com.hotels.repo.UserRepo;
 import com.hotels.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +21,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    /**
-     * Autowired repository.
-     */
+
     private final UserRepo userRepo;
+    private final ModelMapper modelMapper;
 
     /**
      * {@inheritDoc}
@@ -37,9 +38,9 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    public User findById(Long id) {
-        return userRepo.findById(id)
-            .orElseThrow(() -> new WrongIdException(ErrorMessage.USER_NOT_FOUND_BY_ID + id));
+    public UserDto findById(Long id) {
+        User user = getUser(id);
+        return modelMapper.map(user, UserDto.class);
     }
 
     /**
@@ -57,6 +58,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserRefreshToken(String refreshTokenKey, Long id) {
         return userRepo.updateUserRefreshToken(refreshTokenKey, id);
+    }
+
+    @Override
+    public User update(UserDto userDto) {
+        User user = getUser(userDto.getId());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        return userRepo.save(user);
+    }
+
+    private User getUser(Long id) {
+        return userRepo.findById(id)
+            .orElseThrow(() -> new WrongIdException(ErrorMessage.USER_NOT_FOUND_BY_ID + id));
     }
 
 }

@@ -10,7 +10,6 @@ public class HotelDtoMapper extends AbstractConverter<Hotel, HotelDto> {
 
     @Override
     public HotelDto convert(Hotel hotel) {
-
         return HotelDto.builder()
             .id(hotel.getId())
             .name(hotel.getName())

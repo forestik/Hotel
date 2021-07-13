@@ -1,5 +1,6 @@
 package com.hotels.service;
 
+import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 
 /**
@@ -20,7 +21,7 @@ public interface UserService {
      * @param id a value of {@link Long}
      * @return {@link User}
      */
-    User findById(Long id);
+    UserDto findById(Long id);
 
     /**
      * Method that allow you to find {@link User} by email.
@@ -38,4 +39,12 @@ public interface UserService {
      * @return - number of updated rows
      */
     int updateUserRefreshToken(String refreshTokenKey, Long id);
+
+    /**
+     * Updates user data.
+     *
+     * @param userDto {@link UserDto}
+     * @return {@link UserDto}
+     */
+    User update(UserDto userDto);
 }

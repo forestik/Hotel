@@ -15,7 +15,9 @@ public class ModelUtils {
             .email("test@gmail.com")
             .firstName("Test")
             .lastName("Test")
+            .profilePicturePath("test")
             .role(Role.ROLE_USER)
+            .phoneNumber("+380*********")
             .verifyEmail(new VerifyEmail())
             .dateOfRegistration(LocalDateTime.of(2021, 10, 10, 10, 10, 10))
             .build();
