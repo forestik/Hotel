@@ -31,7 +31,7 @@ class EmailServiceImplTest {
     @BeforeEach
     public void setup() throws MessagingException {
         emailService = new EmailServiceImpl(javaMailSender, templateEngine,
-                                            "http://localhost:8080", "@test@gmail.com");
+            "http://localhost:8080", "@test@gmail.com");
 
         when(javaMailSender.createMimeMessage()).thenReturn(new MimeMessage((Session) null));
     }

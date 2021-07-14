@@ -37,12 +37,12 @@ public class ModelUtils {
 
     public static EmailDto getEmailDto() {
         return EmailDto.builder()
-                .id(1L)
-                .token("test")
-                .email("test@gmail.com")
-                .userName("Test Test")
-                .title("Test")
-                .text("Test")
-                .build();
+            .id(1L)
+            .token("test")
+            .email("test@gmail.com")
+            .userName("Test Test")
+            .title("Test")
+            .text("Test")
+            .build();
     }
 }
