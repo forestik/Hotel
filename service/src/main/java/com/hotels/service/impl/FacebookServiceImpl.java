@@ -24,15 +24,6 @@ public class FacebookServiceImpl extends AuthService implements FacebookService 
     private final UserService userService;
 
     /**
-     * Init the UserService.
-     * 
-     * @param userService instance of user service
-     */
-    public FacebookServiceImpl(UserService userService) {
-        this.userService = userService;
-    }
-
-    /**
      * Method to check the user or register a new if he/she doesn't exist.
      * 
      * @param token {@link String} - token.
