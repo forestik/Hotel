@@ -5,9 +5,9 @@ import com.hotels.dto.FacebookDataDto;
 import com.hotels.dto.OwnSignUpDto;
 import com.hotels.dto.SuccessSignInDto;
 import com.hotels.entity.User;
+import com.hotels.jwt.JwtTool;
 import com.hotels.service.FacebookService;
 import com.hotels.service.UserService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -18,14 +18,23 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class FacebookServiceImpl extends AuthService implements FacebookService {
-
     private final UserService userService;
 
     /**
+     * Constructor.
+     *
+     * @param jwtTool     {@link JwtTool}
+     * @param userService {@link UserService}
+     */
+    public FacebookServiceImpl(JwtTool jwtTool, UserService userService) {
+        super(jwtTool);
+        this.userService = userService;
+    }
+
+    /**
      * Method to check the user or register a new if he/she doesn't exist.
-     * 
+     *
      * @param token {@link String} - token.
      * @return successful sign in
      */

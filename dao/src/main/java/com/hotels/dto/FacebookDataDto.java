@@ -1,7 +1,6 @@
 package com.hotels.dto;
 
-import com.hotels.entity.User;
-import com.hotels.enums.Role;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +12,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@Builder
 public class FacebookDataDto {
     private String email;
     private String phoneNumber;
@@ -20,19 +20,4 @@ public class FacebookDataDto {
     private String firstName;
     private String lastName;
 
-    /**
-     * Converts Facebook user to hotel user.
-     *
-     * @return user
-     */
-    public User toUser() {
-        User user = new User();
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setId(id);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setRole(Role.ROLE_USER);
-        return user;
-    }
 }
