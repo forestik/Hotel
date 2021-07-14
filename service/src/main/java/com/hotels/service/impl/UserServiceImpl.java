@@ -1,7 +1,6 @@
 package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
-import com.hotels.dto.HotelDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.exceptions.WrongIdException;

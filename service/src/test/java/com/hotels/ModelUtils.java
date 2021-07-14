@@ -1,5 +1,6 @@
 package com.hotels;
 
+import com.hotels.dto.EmailDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.entity.VerifyEmail;
@@ -32,5 +33,16 @@ public class ModelUtils {
             .email("test@gmail.com")
             .dateOfRegistration(LocalDateTime.of(2021, 10, 10, 10, 10, 10))
             .build();
+    }
+
+    public static EmailDto getEmailDto() {
+        return EmailDto.builder()
+                .id(1L)
+                .token("test")
+                .email("test@gmail.com")
+                .userName("Test Test")
+                .title("Test")
+                .text("Test")
+                .build();
     }
 }
