@@ -7,7 +7,14 @@ import com.hotels.service.RoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,7 +29,7 @@ public class RoomController {
      * Method for finding all rooms in hotel.
      *
      * @param id of {@link Hotel}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link List} of {@link RoomDto}
      */
     @GetMapping("/hotel/{id}")
     public ResponseEntity<List<RoomDto>> getRoomsByHotelId(@PathVariable Long id) {
@@ -33,7 +40,7 @@ public class RoomController {
      * Method for finding room by id.
      *
      * @param id of {@link Room}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link RoomDto}
      */
     @GetMapping("/{id}")
     public ResponseEntity<RoomDto> getRoomById(@PathVariable Long id) {
@@ -44,7 +51,7 @@ public class RoomController {
      * Method for saving room.
      *
      * @param roomDto {@link RoomDto}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Room}
      */
     @PostMapping
     public ResponseEntity<Room> create(@RequestBody RoomDto roomDto) {
@@ -56,7 +63,7 @@ public class RoomController {
      *
      * @param id      of {@link Room}
      * @param roomDto {@link RoomDto}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Room}
      */
     @PutMapping("/{id}")
     public ResponseEntity<Room> update(@PathVariable Long id, @RequestBody RoomDto roomDto) {
@@ -67,7 +74,7 @@ public class RoomController {
      * Method for deleting room by id.
      *
      * @param id of {@link Room}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Object}
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {

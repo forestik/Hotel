@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
@@ -25,7 +27,7 @@ public class UserController {
      * Method for finding user by id user.
      *
      * @param id id of {@link User}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link UserDto}
      */
     @GetMapping("/info/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id) {
@@ -33,10 +35,20 @@ public class UserController {
     }
 
     /**
+     * Method fot finding all users.
+     *
+     * @return {@link ResponseEntity} of {@link List} of {@link UserDto}
+     */
+    @GetMapping
+    public ResponseEntity<List<UserDto>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+    }
+
+    /**
      * Method for updating user data.
      *
      * @param userDto {@link UserDto}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link User}
      */
     @PatchMapping("/info")
     public ResponseEntity<User> update(@RequestBody UserDto userDto) {

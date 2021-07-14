@@ -3,6 +3,8 @@ package com.hotels.service;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 
+import java.util.List;
+
 /**
  * Provides the interface to manage {User} entity.
  *
@@ -47,4 +49,11 @@ public interface UserService {
      * @return {@link UserDto}
      */
     User update(UserDto userDto);
+
+    /**
+     * Finding all users.
+     *
+     * @return {@link List} of {@link UserDto}
+     */
+    List<UserDto> findAll();
 }

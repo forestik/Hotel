@@ -1,6 +1,7 @@
 package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
+import com.hotels.dto.HotelDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.exceptions.WrongIdException;
@@ -9,9 +10,11 @@ import com.hotels.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -65,6 +68,13 @@ public class UserServiceImpl implements UserService {
         User user = getUser(userDto.getId());
         user.setPhoneNumber(userDto.getPhoneNumber());
         return userRepo.save(user);
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+        return modelMapper.map(userRepo.findAll(),
+            new TypeToken<List<UserDto>>() {
+            }.getType());
     }
 
     private User getUser(Long id) {

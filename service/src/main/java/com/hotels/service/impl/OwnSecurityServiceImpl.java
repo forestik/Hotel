@@ -2,6 +2,7 @@ package com.hotels.service.impl;
 
 import com.hotels.constant.ErrorMessage;
 import com.hotels.dto.AccessRefreshTokensDto;
+import com.hotels.dto.EmailDto;
 import com.hotels.dto.OwnSignInDto;
 import com.hotels.dto.OwnSignUpDto;
 import com.hotels.dto.SuccessSignInDto;
@@ -86,8 +87,13 @@ public class OwnSecurityServiceImpl extends AuthService implements OwnSecuritySe
         try {
             User savedUser = userService.save(user);
             user.setId(savedUser.getId());
-            emailService.sendVerificationEmail(savedUser.getId(), savedUser.getFirstName(), savedUser.getEmail(),
-                savedUser.getVerifyEmail().getToken());
+            EmailDto emailDto = EmailDto.builder()
+                .id(savedUser.getId())
+                .email(savedUser.getEmail())
+                .userName(savedUser.getFirstName() + savedUser.getLastName())
+                .token(savedUser.getVerifyEmail().getToken())
+                .build();
+            emailService.sendVerificationEmail(emailDto);
         } catch (DataIntegrityViolationException e) {
             throw new UserAlreadyRegisteredException(ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL);
         }

@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +34,7 @@ public class GoogleSecurityController {
      * Method that provide authenticate with google token.
      *
      * @param idToken {@link String} - google idToken
-     * @return {@link SuccessSignInDto} if token valid
+     * @return {@link ResponseEntity} of {@link SuccessSignInDto} if token valid
      */
     @ApiOperation("Make authentication by Google")
     @ApiResponses(value = {
@@ -40,7 +42,7 @@ public class GoogleSecurityController {
         @ApiResponse(code = 400, message = BAD_GOOGLE_TOKEN)
     })
     @GetMapping("/{idToken}")
-    public SuccessSignInDto authenticate(@PathVariable @NotBlank String idToken) {
-        return googleSecurityService.authenticate(idToken);
+    public ResponseEntity<SuccessSignInDto> authenticate(@PathVariable @NotBlank String idToken) {
+        return ResponseEntity.status(HttpStatus.OK).body(googleSecurityService.authenticate(idToken));
     }
 }
