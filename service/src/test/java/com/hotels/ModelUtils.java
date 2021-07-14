@@ -1,6 +1,9 @@
 package com.hotels;
 
 import com.hotels.dto.EmailDto;
+import com.hotels.dto.OwnSignUpDto;
+import com.hotels.dto.SuccessSignInDto;
+import com.hotels.dto.SuccessSignUpDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.entity.VerifyEmail;
@@ -44,5 +47,32 @@ public class ModelUtils {
             .title("Test")
             .text("Test")
             .build();
+    }
+
+    public static OwnSignUpDto getOwnSignUpDto() {
+        return OwnSignUpDto.builder()
+                .firstName("Test")
+                .lastName("Test")
+                .email("test@gmail.com")
+                .password("password")
+                .build();
+    }
+
+    public static SuccessSignUpDto getSuccessSignUpDto() {
+        return SuccessSignUpDto.builder()
+                .userId(1L)
+                .firstName("Test")
+                .email("test@gmail.com")
+                .ownRegistrations(true)
+                .build();
+    }
+
+    public static SuccessSignInDto getSuccessSignInDto() {
+        return SuccessSignInDto.builder()
+                .userId(1L)
+                .firstName("Test")
+                .accessToken("accessToken")
+                .refreshToken("refreshToken")
+                .build();
     }
 }

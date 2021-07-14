@@ -1,12 +1,8 @@
 package com.hotels;
 
-import com.hotels.dto.EmailDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
-import com.hotels.entity.VerifyEmail;
 import com.hotels.enums.Role;
-
-import java.time.LocalDateTime;
 
 public class ModelUtils {
 

@@ -1,5 +1,7 @@
 package com.hotels;
 
+import com.hotels.dto.OwnSignUpDto;
+import com.hotels.dto.SuccessSignUpDto;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
 import com.hotels.entity.VerifyEmail;

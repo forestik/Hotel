@@ -90,7 +90,7 @@ public class OwnSecurityServiceImpl extends AuthService implements OwnSecuritySe
             EmailDto emailDto = EmailDto.builder()
                 .id(savedUser.getId())
                 .email(savedUser.getEmail())
-                .userName(savedUser.getFirstName() + savedUser.getLastName())
+                .userName(savedUser.getFirstName() + " " + savedUser.getLastName())
                 .token(savedUser.getVerifyEmail().getToken())
                 .build();
             emailService.sendVerificationEmail(emailDto);
