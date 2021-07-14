@@ -55,7 +55,7 @@ class OwnSecurityServiceImplTest {
     @BeforeEach
     public void setup() {
         ownSecurityService = new OwnSecurityServiceImpl(ownSecurityRepo, userService, passwordEncoder,
-                                                        jwtTool, 100, emailService);
+            jwtTool, 100, emailService);
     }
 
     @Test
@@ -64,11 +64,11 @@ class OwnSecurityServiceImplTest {
         SuccessSignUpDto successSignUpDto = ModelUtils.getSuccessSignUpDto();
         User user = ModelUtils.getUser();
         EmailDto emailDto = EmailDto.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .userName(user.getFirstName() + " " + user.getLastName())
-                .token(user.getVerifyEmail().getToken())
-                .build();
+            .id(user.getId())
+            .email(user.getEmail())
+            .userName(user.getFirstName() + " " + user.getLastName())
+            .token(user.getVerifyEmail().getToken())
+            .build();
         when(userService.save(any(User.class))).thenReturn(user);
         doNothing().when(emailService).sendVerificationEmail(emailDto);
         assertEquals(ownSecurityService.signUp(ownSignUpDto), successSignUpDto);
@@ -80,7 +80,7 @@ class OwnSecurityServiceImplTest {
     void signUpUserAlreadyRegisteredException() {
         OwnSignUpDto ownSignUpDto = ModelUtils.getOwnSignUpDto();
         when(userService.save(any(User.class)))
-                .thenThrow(new DataIntegrityViolationException(ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL));
+            .thenThrow(new DataIntegrityViolationException(ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL));
         assertThrows(UserAlreadyRegisteredException.class, () -> ownSecurityService.signUp(ownSignUpDto));
         verify(passwordEncoder).encode(ownSignUpDto.getPassword());
         verify(jwtTool, times(2)).generateTokenKey();

@@ -30,18 +30,19 @@ class OwnSecurityControllerTest {
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcBuilders
-                .standaloneSetup(ownSecurityController)
-                .build();
+            .standaloneSetup(ownSecurityController)
+            .build();
     }
+
     @Test
     void singIn() throws Exception {
         OwnSignInDto ownSignInDto = new OwnSignInDto("test@gmail.com", "password");
         Gson gson = new Gson();
         String json = gson.toJson(ownSignInDto);
         mockMvc.perform(post("/ownSecurity/signIn")
-                .content(json)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
         verify(ownSecurityService).signIn(ownSignInDto);
     }
 }

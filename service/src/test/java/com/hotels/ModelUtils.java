@@ -51,28 +51,28 @@ public class ModelUtils {
 
     public static OwnSignUpDto getOwnSignUpDto() {
         return OwnSignUpDto.builder()
-                .firstName("Test")
-                .lastName("Test")
-                .email("test@gmail.com")
-                .password("password")
-                .build();
+            .firstName("Test")
+            .lastName("Test")
+            .email("test@gmail.com")
+            .password("password")
+            .build();
     }
 
     public static SuccessSignUpDto getSuccessSignUpDto() {
         return SuccessSignUpDto.builder()
-                .userId(1L)
-                .firstName("Test")
-                .email("test@gmail.com")
-                .ownRegistrations(true)
-                .build();
+            .userId(1L)
+            .firstName("Test")
+            .email("test@gmail.com")
+            .ownRegistrations(true)
+            .build();
     }
 
     public static SuccessSignInDto getSuccessSignInDto() {
         return SuccessSignInDto.builder()
-                .userId(1L)
-                .firstName("Test")
-                .accessToken("accessToken")
-                .refreshToken("refreshToken")
-                .build();
+            .userId(1L)
+            .firstName("Test")
+            .accessToken("accessToken")
+            .refreshToken("refreshToken")
+            .build();
     }
 }
