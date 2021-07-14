@@ -73,7 +73,7 @@ class UserControllerTest {
     @Test
     void deactivate() throws Exception {
         mockMvc.perform(post("/user/deactivate/{id}", 1))
-                .andExpect(status().isOk());
+            .andExpect(status().isOk());
         verify(userService).deactivate(1L);
     }
 }
