@@ -19,6 +19,7 @@ import java.util.Collections;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -67,5 +68,12 @@ class UserControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
         verify(userService).findAll();
+    }
+
+    @Test
+    void deactivate() throws Exception {
+        mockMvc.perform(post("/user/deactivate/{id}", 1))
+                .andExpect(status().isOk());
+        verify(userService).deactivate(1L);
     }
 }

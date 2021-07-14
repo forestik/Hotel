@@ -3,6 +3,7 @@ package com.hotels.service.impl;
 import com.hotels.constant.ErrorMessage;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
+import com.hotels.enums.UserStatus;
 import com.hotels.exceptions.WrongIdException;
 import com.hotels.repo.UserRepo;
 import com.hotels.service.UserService;
@@ -74,6 +75,13 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(userRepo.findAll(),
             new TypeToken<List<UserDto>>() {
             }.getType());
+    }
+
+    @Override
+    public void deactivate(Long id) {
+        User user = getUser(id);
+        user.setUserStatus(UserStatus.DEACTIVATED);
+        userRepo.save(user);
     }
 
     private User getUser(Long id) {

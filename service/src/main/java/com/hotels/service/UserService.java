@@ -2,6 +2,7 @@ package com.hotels.service;
 
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -56,4 +57,11 @@ public interface UserService {
      * @return {@link List} of {@link UserDto}
      */
     List<UserDto> findAll();
+
+    /**
+     * Deactivating user.
+     *
+     * @param id of {@link User}
+     */
+    void deactivate(Long id);
 }

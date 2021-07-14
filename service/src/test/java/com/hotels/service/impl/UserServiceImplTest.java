@@ -3,6 +3,7 @@ package com.hotels.service.impl;
 import com.hotels.ModelUtils;
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
+import com.hotels.enums.UserStatus;
 import com.hotels.repo.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -83,5 +84,14 @@ class UserServiceImplTest {
             new TypeToken<List<UserDto>>() {
             }.getType())).thenReturn(Collections.singletonList(userDto));
         assertEquals(userService.findAll(), Collections.singletonList(userDto));
+    }
+
+    @Test
+    void deactivate() {
+        User user = ModelUtils.getUser();
+        when(userRepo.findById(user.getId())).thenReturn(Optional.of(user));
+        user.setUserStatus(UserStatus.DEACTIVATED);
+        userService.deactivate(user.getId());
+        verify(userRepo).save(user);
     }
 }

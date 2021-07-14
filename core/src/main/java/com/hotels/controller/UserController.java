@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,5 +54,17 @@ public class UserController {
     @PatchMapping("/info")
     public ResponseEntity<User> update(@RequestBody UserDto userDto) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(userDto));
+    }
+
+    /**
+     * Method got deactivating user.
+     *
+     * @param id of {@link User}
+     * @return {@link ResponseEntity} of {@link Object}
+     */
+    @PostMapping("/deactivate/{id}")
+    public ResponseEntity<Object> deactivate(@PathVariable Long id) {
+        userService.deactivate(id);
+        return ResponseEntity.ok().build();
     }
 }
