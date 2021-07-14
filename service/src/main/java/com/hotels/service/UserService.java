@@ -2,7 +2,6 @@ package com.hotels.service;
 
 import com.hotels.dto.UserDto;
 import com.hotels.entity.User;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
