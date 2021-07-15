@@ -6,7 +6,12 @@ import com.hotels.service.BookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
@@ -23,7 +28,7 @@ public class BookingController {
      * Method for finding all booking by user email.
      * 
      * @param principal {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link List} of {@link Booking}
      */
     @GetMapping
     public ResponseEntity<List<Booking>> findAll(@ApiIgnore Principal principal) {
@@ -33,7 +38,7 @@ public class BookingController {
     /**
      * Method for finding all booking.
      *
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link List} of {@link Booking}
      */
     @GetMapping("/all")
     public ResponseEntity<List<Booking>> findAll() {
@@ -44,7 +49,7 @@ public class BookingController {
      * Method for finding booking by id.
      *
      * @param id of {@link Booking}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Booking}
      */
     @GetMapping("/{id}")
     public ResponseEntity<Booking> findById(@PathVariable Long id) {
@@ -56,7 +61,7 @@ public class BookingController {
      *
      * @param bookingDto {@link BookingDto}
      * @param principal  {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Booking}
      */
     @PostMapping
     public ResponseEntity<Booking> booking(@RequestBody BookingDto bookingDto, @ApiIgnore Principal principal) {
@@ -68,7 +73,7 @@ public class BookingController {
      *
      * @param id        of {@link Booking}
      * @param principal {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Boolean}
      */
     @PostMapping("/confirm/{id}")
     public ResponseEntity<Boolean> confirm(@PathVariable Long id, @ApiIgnore Principal principal) {
@@ -80,7 +85,7 @@ public class BookingController {
      *
      * @param id        of {@link Booking}
      * @param principal {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Boolean}
      */
     @PostMapping("/reject/{id}")
     public ResponseEntity<Boolean> reject(@PathVariable Long id, @ApiIgnore Principal principal) {
@@ -92,7 +97,7 @@ public class BookingController {
      *
      * @param id        of {@link Booking}
      * @param principal {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Boolean}
      */
     @PostMapping("/cancel/{id}")
     public ResponseEntity<Boolean> cancel(@PathVariable Long id, @ApiIgnore Principal principal) {

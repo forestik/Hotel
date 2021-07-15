@@ -5,17 +5,23 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Getter
 @EqualsAndHashCode
-public class SuccessSignUpDto {
-    private Long userId;
-    private String firstName;
+@Builder
+public class EmailDto {
+
+    private Long id;
+
     private String email;
-    private boolean ownRegistrations;
+
+    private String text;
+
+    private String title;
+
+    private String userName;
+
+    private String token;
 }

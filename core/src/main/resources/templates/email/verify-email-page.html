@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Password Reset</title>
+    <title>Account Verification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         /**
@@ -175,7 +175,7 @@
                 <tr>
                     <td align="left" bgcolor="#ffffff"
                         style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                        <p th:text="#{hello} + ${name + ','}"></p>
+                        <p th:text="#{hello} + ' ' + ${name + ','}"></p>
                         <div style="margin: 0;" th:text="#{thanks}"></div>
                         <div style="margin: 0;" th:text="#{text.verify}"></div>
                     </td>

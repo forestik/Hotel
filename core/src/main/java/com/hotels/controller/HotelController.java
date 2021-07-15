@@ -29,7 +29,7 @@ public class HotelController {
     /**
      * Method for finding all hotels.
      *
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link List} of {@link HotelDto}
      */
     @GetMapping
     public ResponseEntity<List<HotelDto>> findAll() {
@@ -40,7 +40,7 @@ public class HotelController {
      * Method for finding hotel by id.
      *
      * @param id id of {@link Hotel}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link HotelDto}
      */
     @GetMapping("/{id}")
     public ResponseEntity<HotelDto> findById(@PathVariable Long id) {
@@ -52,7 +52,7 @@ public class HotelController {
      *
      * @param hotelDto  {@link HotelDto}
      * @param principal {@link Principal}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Hotel}
      */
     @PostMapping
     public ResponseEntity<Hotel> save(@RequestBody HotelDto hotelDto, @ApiIgnore Principal principal) {
@@ -63,7 +63,7 @@ public class HotelController {
      * Method for updating hotel.
      *
      * @param hotelDto {@link HotelDto}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Hotel}
      */
     @PutMapping
     public ResponseEntity<Hotel> update(@RequestBody HotelDto hotelDto) {
@@ -74,7 +74,7 @@ public class HotelController {
      * Method for deleting hotel by id.
      *
      * @param id of {@link Hotel}
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Object}
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {

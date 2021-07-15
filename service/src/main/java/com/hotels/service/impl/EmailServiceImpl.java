@@ -2,6 +2,7 @@ package com.hotels.service.impl;
 
 import com.hotels.constant.EmailConstants;
 import com.hotels.constant.LogMessage;
+import com.hotels.dto.EmailDto;
 import com.hotels.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +48,25 @@ public class EmailServiceImpl implements EmailService {
      * {@inheritDoc}
      */
     @Override
-    public void sendVerificationEmail(Long id, String name, String email, String token) {
+    public void sendVerificationEmail(EmailDto emailDto) {
         Map<String, Object> model = new HashMap<>();
         model.put(EmailConstants.CLIENT_LINK, clientLink);
-        model.put(EmailConstants.USER_NAME, name);
+        model.put(EmailConstants.USER_NAME, emailDto.getUserName());
         model.put(EmailConstants.VERIFY_ADDRESS, clientLink + "/verifyEmail?token="
-            + token + "&user_id=" + id);
-        log.info(Locale.getDefault().toString());
+            + emailDto.getToken() + "&user_id=" + emailDto.getId());
         String template = createEmailTemplate(model, EmailConstants.VERIFY_EMAIL_PAGE);
-        sendEmail(email, EmailConstants.VERIFY_EMAIL, template);
+        sendEmail(emailDto.getEmail(), EmailConstants.VERIFY_EMAIL, template);
+    }
+
+    @Override
+    public void sendInfoEmail(EmailDto emailDto) {
+        Map<String, Object> model = new HashMap<>();
+        model.put(EmailConstants.CLIENT_LINK, clientLink);
+        model.put(EmailConstants.USER_NAME, emailDto.getUserName());
+        model.put(EmailConstants.TEXT, emailDto.getText());
+        model.put(EmailConstants.TITLE, emailDto.getTitle());
+        String template = createEmailTemplate(model, EmailConstants.EMAIL_PAGE);
+        sendEmail(emailDto.getEmail(), EmailConstants.EMAIL, template);
     }
 
     private String createEmailTemplate(Map<String, Object> vars, String templateName) {

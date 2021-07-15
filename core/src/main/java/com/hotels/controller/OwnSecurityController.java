@@ -1,7 +1,11 @@
 package com.hotels.controller;
 
 import com.hotels.constant.HttpStatuses;
-import com.hotels.dto.*;
+import com.hotels.dto.OwnSignInDto;
+import com.hotels.dto.OwnSignUpDto;
+import com.hotels.dto.SuccessSignInDto;
+import com.hotels.dto.SuccessSignUpDto;
+import com.hotels.dto.UpdatePasswordDto;
 import com.hotels.service.OwnSecurityService;
 import com.hotels.service.VerifyEmailService;
 import io.swagger.annotations.ApiOperation;
@@ -13,14 +17,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.security.Principal;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.security.Principal;
 
-import static com.hotels.constant.ErrorMessage.*;
+import static com.hotels.constant.ErrorMessage.NO_ANY_EMAIL_TO_VERIFY_BY_THIS_TOKEN;
+import static com.hotels.constant.ErrorMessage.PASSWORD_DOES_NOT_MATCH;
+import static com.hotels.constant.ErrorMessage.REFRESH_TOKEN_NOT_VALID;
+import static com.hotels.constant.ErrorMessage.USER_ALREADY_REGISTERED_WITH_THIS_EMAIL;
+import static com.hotels.constant.ErrorMessage.USER_CREATED;
 
 /**
  * Controller that provides our sign-up and sign-in logic.
@@ -54,7 +68,7 @@ public class OwnSecurityController {
      * Method for sign-up by our security logic.
      *
      * @param dto - {@link OwnSignUpDto} that have sign-up information.
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link SuccessSignUpDto}
      */
     @ApiOperation("Sign-up by own security logic")
     @ApiResponses(value = {
@@ -70,7 +84,7 @@ public class OwnSecurityController {
      * Method for sign-in by our security logic.
      *
      * @param dto - {@link OwnSignInDto} that have sign-in information.
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link SuccessSignUpDto}
      */
     @ApiOperation("Sign-in by own security logic")
     @ApiResponses(value = {
@@ -78,15 +92,15 @@ public class OwnSecurityController {
         @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST)
     })
     @PostMapping("/signIn")
-    public SuccessSignInDto singIn(@Valid @RequestBody OwnSignInDto dto) {
-        return ownSecurityService.signIn(dto);
+    public ResponseEntity<SuccessSignInDto> singIn(@Valid @RequestBody OwnSignInDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(ownSecurityService.signIn(dto));
     }
 
     /**
      * Method for verifying users email.
      *
      * @param token - {@link String} this is token (hash) to verify user.
-     * @return {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Boolean}
      */
     @ApiOperation("Verify email by email token (hash that contains link for verification)")
     @ApiResponses(value = {
@@ -103,7 +117,7 @@ public class OwnSecurityController {
      * Method for refresh access token.
      *
      * @param refreshToken - {@link String} this is refresh token.
-     * @return {@link ResponseEntity} - with new access token.
+     * @return {@link ResponseEntity} of {@link Object} - with new access token.
      */
     @ApiOperation("Updating access token by refresh token")
     @ApiResponses(value = {
@@ -119,7 +133,7 @@ public class OwnSecurityController {
      * Method for updating current password.
      *
      * @param updateDto - {@link UpdatePasswordDto}
-     * @return - {@link ResponseEntity}
+     * @return {@link ResponseEntity} of {@link Object}
      */
     @ApiOperation("Updating current password.")
     @ApiResponses(value = {
