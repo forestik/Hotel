@@ -153,9 +153,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/role",
                 "/user/update/role")
             .hasRole(SUPER_ADMIN)
-                .antMatchers(HttpMethod.GET,
-                             "/room/hotel/{id}")
-                .hasAnyRole(ADMIN, SUPER_ADMIN)
+            .antMatchers(HttpMethod.GET,
+                "/room/hotel/{id}")
+            .hasAnyRole(ADMIN, SUPER_ADMIN)
             .anyRequest().hasAnyRole(SUPER_ADMIN);
     }
 
