@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static com.hotels.constant.AppConstant.ADMIN;
+import static com.hotels.constant.AppConstant.SUPER_ADMIN;
 import static com.hotels.constant.AppConstant.USER;
 import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
@@ -117,7 +118,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET,
                 "/hotel/**",
                 "/room/**",
-                "/user",
                 "/user/{userId}/profile/",
                 "/user/isOnline/{userId}/",
                 "/user/{userId}/profileStatistics/",
@@ -125,7 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/userAndAllFriendsWithOnlineStatus",
                 "/user/{userId}/recommendedFriends/",
                 "/user/{userId}/friends/")
-            .hasAnyRole(USER, ADMIN)
+            .hasAnyRole(USER, ADMIN, SUPER_ADMIN)
             .antMatchers(HttpMethod.PUT,
                 "/ownSecurity",
                 "/user/profile")
@@ -136,30 +136,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/booking",
                 "/user/profile")
             .hasAnyRole(USER, ADMIN)
-            .antMatchers(HttpMethod.PATCH,
-                "/user/profilePicture",
-                "/user/deleteProfilePicture")
-            .hasAnyRole(USER, ADMIN)
             .antMatchers(HttpMethod.GET,
-                "/user/all",
+                "/user",
                 "/user/roles")
-            .hasAnyRole(ADMIN)
+            .hasAnyRole(SUPER_ADMIN)
             .antMatchers(HttpMethod.POST,
                 "/hotel/**",
-                "/booking/**",
-                "/place/filter/predicate")
+                "/booking/**")
             .hasAnyRole(ADMIN)
             .antMatchers(HttpMethod.PUT,
-                "/hotel/**",
-                "/place/update/")
+                "/hotel/**")
             .hasAnyRole(ADMIN)
             .antMatchers(HttpMethod.PATCH,
                 "/user",
                 "/user/status",
                 "/user/role",
                 "/user/update/role")
-            .hasRole(ADMIN)
-            .anyRequest().hasAnyRole(ADMIN);
+            .hasRole(SUPER_ADMIN)
+            .antMatchers(HttpMethod.GET,
+                "/room/hotel/{id}")
+            .hasAnyRole(ADMIN, SUPER_ADMIN)
+            .anyRequest().hasAnyRole(SUPER_ADMIN);
     }
 
     /**
