@@ -136,10 +136,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/booking",
                 "/user/profile")
             .hasAnyRole(USER, ADMIN)
-            .antMatchers(HttpMethod.PATCH,
-                "/user/profilePicture",
-                "/user/deleteProfilePicture")
-            .hasAnyRole(USER, ADMIN)
             .antMatchers(HttpMethod.GET,
                 "/user",
                 "/user/roles")
